@@ -1,302 +1,919 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Block Street Records</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Block Street Records | Fayetteville & Bentonville</title>
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
-
-:root {
-  --black:#0b0b0b;
-  --red:#ff2d2d;
-  --soft:#cfcfcf;
+:root{
+  --black:#050505;
+  --cream:#f5ead6;
+  --red:#ff2b2b;
+  --yellow:#ffd84d;
+  --blue:#15b8ff;
+  --green:#39ff88;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--black);
-  color: white;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:#050505;
+  color:white;
+  font-family:Inter,sans-serif;
   overflow-x:hidden;
 }
 
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  opacity:.18;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,43,43,.2), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(21,184,255,.18), transparent 35%),
+    radial-gradient(circle at 50% 90%, rgba(255,216,77,.12), transparent 40%);
+}
+
+.grain{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9998;
+  opacity:.08;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+
 /* NAV */
-nav {
-  position: fixed;
+.nav{
+  position:fixed;
   top:0;
+  left:0;
   width:100%;
-  padding:20px 40px;
+  z-index:1000;
+  padding:18px 5vw;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:999;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
+  background:linear-gradient(to bottom, rgba(0,0,0,.82), rgba(0,0,0,.25), transparent);
+  backdrop-filter:blur(12px);
 }
 
-nav img {
-  height:40px;
-}
-
-nav a {
-  color:white;
-  margin-left:25px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
   text-decoration:none;
-  font-size:14px;
-  letter-spacing:1px;
+  color:white;
+  font-weight:900;
+  letter-spacing:.08em;
 }
+
+.brand img{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  filter:drop-shadow(0 0 18px rgba(255,255,255,.25));
+}
+
+.navlinks{
+  display:flex;
+  gap:24px;
+}
+
+.navlinks a{
+  color:white;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:12px;
+  letter-spacing:.16em;
+  opacity:.85;
+}
+
+.navlinks a:hover{color:var(--yellow)}
 
 /* HERO */
-.hero {
-  height:100vh;
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-  url("IMG_6377.JPG") center/cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:0 10%;
-}
-
-.hero h1 {
-  font-family:'Oswald', sans-serif;
-  font-size:70px;
-  letter-spacing:3px;
-}
-
-.hero p {
-  margin-top:20px;
-  color:var(--soft);
-  max-width:500px;
-}
-
-.hero button {
-  margin-top:30px;
-  padding:14px 30px;
-  background:var(--red);
-  border:none;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.hero button:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(255,45,45,0.6);
-}
-
-/* SECTION */
-section {
-  padding:100px 10%;
-}
-
-/* GRID */
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:30px;
-}
-
-.card {
+.hero{
+  min-height:100vh;
   position:relative;
-  overflow:hidden;
-  cursor:pointer;
-}
-
-.card img {
-  width:100%;
-  height:350px;
-  object-fit:cover;
-  transition:0.4s;
-}
-
-.card:hover img {
-  transform:scale(1.1);
-}
-
-.card span {
-  position:absolute;
-  bottom:20px;
-  left:20px;
-  font-family:'Oswald';
-  font-size:22px;
-}
-
-/* ABOUT */
-.about {
   display:flex;
+  align-items:center;
+  padding:130px 5vw 90px;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.96), rgba(0,0,0,.58), rgba(0,0,0,.22)),
+    linear-gradient(0deg, rgba(0,0,0,1), transparent 45%),
+    url("IMG_6377.JPG") center/cover;
+  transform:scale(1.04);
+  animation:slowMove 18s ease-in-out infinite alternate;
+}
+
+@keyframes slowMove{
+  from{transform:scale(1.04) translateX(0)}
+  to{transform:scale(1.1) translateX(-18px)}
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:980px;
+}
+
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:22px;
+  color:var(--yellow);
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:.22em;
+  font-weight:900;
+}
+
+.pulse-dot{
+  width:9px;
+  height:9px;
+  background:var(--red);
+  border-radius:50%;
+  box-shadow:0 0 25px var(--red);
+}
+
+.hero h1{
+  font-family:"Bebas Neue",sans-serif;
+  font-size:clamp(78px,14vw,190px);
+  line-height:.82;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 24px rgba(255,43,43,.25),
+    6px 6px 0 rgba(255,43,43,.25),
+    -5px -3px 0 rgba(21,184,255,.18);
+}
+
+.hero p{
+  max-width:650px;
+  margin-top:28px;
+  color:#ddd;
+  font-size:clamp(17px,2vw,23px);
+  line-height:1.55;
+}
+
+.hero-actions{
+  display:flex;
+  gap:16px;
   flex-wrap:wrap;
+  margin-top:34px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:54px;
+  padding:0 26px;
+  border-radius:999px;
+  text-decoration:none;
+  color:white;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:12px;
+  border:1px solid rgba(255,255,255,.2);
+  transition:.25s;
+}
+
+.btn.primary{
+  background:var(--red);
+  box-shadow:0 0 34px rgba(255,43,43,.45);
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(12px);
+}
+
+.btn:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+}
+
+.spinning-record{
+  position:absolute;
+  right:5vw;
+  bottom:8vh;
+  width:min(34vw,390px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:
+    radial-gradient(circle, #111 0 7%, #eee 7.5% 9%, #111 9.5% 18%, #1b1b1b 18.5% 19%, #050505 20% 100%);
+  border:2px solid rgba(255,255,255,.12);
+  box-shadow:0 0 70px rgba(0,0,0,.85);
+  opacity:.74;
+  animation:spin 14s linear infinite;
+}
+
+.spinning-record:before{
+  content:"";
+  position:absolute;
+  inset:13%;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:
+    inset 0 0 0 12px rgba(255,255,255,.015),
+    inset 0 0 0 22px rgba(255,255,255,.025),
+    inset 0 0 0 42px rgba(255,255,255,.015);
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* MARQUEE */
+.marquee{
+  overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(255,255,255,.14);
+  background:#0d0d0d;
+}
+
+.marquee-track{
+  display:flex;
+  width:max-content;
+  animation:marquee 28s linear infinite;
+}
+
+.marquee span{
+  font-family:"Bebas Neue";
+  font-size:42px;
+  padding:18px 28px;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.55);
+  letter-spacing:.08em;
+}
+
+@keyframes marquee{
+  to{transform:translateX(-50%)}
+}
+
+/* SECTIONS */
+.section{
+  padding:110px 5vw;
+  position:relative;
+}
+
+.section-title{
+  max-width:900px;
+  margin-bottom:45px;
+}
+
+.eyebrow{
+  color:var(--red);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+h2{
+  font-family:"Bebas Neue";
+  font-size:clamp(50px,8vw,105px);
+  line-height:.9;
+  letter-spacing:.02em;
+}
+
+.section-title p{
+  margin-top:18px;
+  color:#bbb;
+  font-size:18px;
+  line-height:1.6;
+  max-width:720px;
+}
+
+/* FEATURE CARDS */
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.feature-card{
+  position:relative;
+  min-height:420px;
+  border-radius:28px;
+  overflow:hidden;
+  background:#111;
+  border:1px solid rgba(255,255,255,.12);
+  transform-style:preserve-3d;
+}
+
+.feature-card.large{
+  grid-column:span 2;
+}
+
+.feature-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  inset:0;
+  transition:.7s ease;
+}
+
+.feature-card:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.92), rgba(0,0,0,.1));
+}
+
+.feature-card:hover img{
+  transform:scale(1.12) rotate(.5deg);
+}
+
+.feature-content{
+  position:absolute;
+  z-index:2;
+  left:24px;
+  right:24px;
+  bottom:24px;
+}
+
+.feature-content h3{
+  font-family:"Bebas Neue";
+  font-size:40px;
+  line-height:.95;
+}
+
+.feature-content p{
+  color:#ccc;
+  margin-top:8px;
+  line-height:1.45;
+}
+
+/* SPLIT */
+.split{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
   gap:50px;
   align-items:center;
 }
 
-.about img {
-  width:400px;
-  border-radius:8px;
+.image-stack{
+  position:relative;
+  min-height:640px;
 }
 
-.about div {
-  max-width:500px;
-}
-
-/* PARALLAX */
-.parallax {
-  height:60vh;
-  background:url("turntable.jpg") center/cover fixed;
-}
-
-/* CTA BAR */
-.cta {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:var(--red);
-  padding:15px 20px;
+.image-stack img{
+  position:absolute;
+  object-fit:cover;
   border-radius:30px;
-  font-size:14px;
-  cursor:pointer;
-  box-shadow:0 0 20px rgba(255,45,45,0.6);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 30px 90px rgba(0,0,0,.6);
+}
+
+.image-stack .one{
+  width:72%;
+  height:440px;
+  left:0;
+  top:0;
+}
+
+.image-stack .two{
+  width:55%;
+  height:360px;
+  right:0;
+  bottom:0;
+}
+
+.story-card{
+  padding:42px;
+  border-radius:32px;
+  background:
+    linear-gradient(145deg, rgba(255,43,43,.14), rgba(255,255,255,.04)),
+    rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+.story-card p{
+  color:#d6d6d6;
+  line-height:1.75;
+  font-size:18px;
+  margin-top:18px;
+}
+
+/* VINYL WALL */
+.vinyl-wall{
+  min-height:90vh;
+  background:
+    linear-gradient(rgba(0,0,0,.12), rgba(0,0,0,.95)),
+    url("records-3.jpeg") center/cover fixed;
+  display:flex;
+  align-items:end;
+  padding:90px 5vw;
+}
+
+.vinyl-panel{
+  max-width:760px;
+  padding:42px;
+  border-radius:32px;
+  background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(16px);
+}
+
+.vinyl-panel p{
+  color:#ddd;
+  font-size:19px;
+  line-height:1.6;
+  margin-top:16px;
+}
+
+/* SHOP ONLINE */
+.shop-band{
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255,216,77,.18), transparent 28%),
+    radial-gradient(circle at 90% 40%, rgba(255,43,43,.18), transparent 32%),
+    #090909;
+}
+
+.merch-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.merch-card{
+  padding:30px;
+  min-height:280px;
+  border-radius:30px;
+  background:linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.13);
+  position:relative;
+  overflow:hidden;
+}
+
+.merch-card:before{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  right:-40px;
+  top:-40px;
+  border-radius:50%;
+  background:var(--red);
+  opacity:.18;
+  filter:blur(8px);
+}
+
+.merch-card h3{
+  font-family:"Bebas Neue";
+  font-size:48px;
+}
+
+.merch-card p{
+  color:#cfcfcf;
+  line-height:1.55;
+  margin-top:12px;
+}
+
+.merch-card a{
+  margin-top:24px;
+}
+
+/* LOCATIONS */
+.locations{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+}
+
+.location-card{
+  border-radius:34px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.13);
+  background:#111;
+}
+
+.location-card img{
+  width:100%;
+  height:330px;
+  object-fit:cover;
+}
+
+.location-info{
+  padding:30px;
+}
+
+.location-info h3{
+  font-family:"Bebas Neue";
+  font-size:46px;
+}
+
+.location-info p{
+  color:#ccc;
+  line-height:1.7;
+  margin-top:10px;
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+}
+
+.gallery img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:22px;
+  filter:saturate(1.1) contrast(1.06);
+}
+
+.gallery img:nth-child(1),
+.gallery img:nth-child(6){
+  grid-column:span 2;
+}
+
+.gallery img:nth-child(3){
+  grid-column:span 2;
+  height:540px;
+  grid-row:span 2;
 }
 
 /* FOOTER */
-footer {
-  padding:60px 10%;
-  background:#050505;
+.footer{
+  padding:80px 5vw 110px;
+  background:#030303;
+  border-top:1px solid rgba(255,255,255,.12);
 }
 
-footer p {
-  color:#888;
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.footer-logo{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+.footer-logo img{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+}
+
+.footer h4{
+  font-family:"Bebas Neue";
+  font-size:44px;
+}
+
+.footer p,.footer a{
+  color:#aaa;
+  text-decoration:none;
+  line-height:1.7;
+}
+
+.sticky-cta{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:1001;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.sticky-cta a{
+  background:var(--red);
+  color:white;
+  text-decoration:none;
+  padding:14px 18px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  box-shadow:0 0 35px rgba(255,43,43,.5);
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(34px);
+  transition:1s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
 }
 
 /* MOBILE */
-@media(max-width:768px){
-  .hero h1 { font-size:40px; }
-  nav { padding:15px 20px; }
+@media(max-width:950px){
+  .navlinks{display:none}
+  .spinning-record{opacity:.18;width:70vw}
+  .feature-grid,.merch-grid,.locations,.split{
+    grid-template-columns:1fr;
+  }
+  .feature-card.large{grid-column:auto}
+  .feature-card{min-height:360px}
+  .image-stack{min-height:560px}
+  .gallery{
+    grid-template-columns:1fr 1fr;
+  }
+  .gallery img,
+  .gallery img:nth-child(1),
+  .gallery img:nth-child(3),
+  .gallery img:nth-child(6){
+    grid-column:auto;
+    height:260px;
+  }
 }
 
+@media(max-width:600px){
+  .hero{
+    padding-left:24px;
+    padding-right:24px;
+  }
+  .section{padding:80px 24px}
+  .hero-actions .btn{width:100%}
+  .sticky-cta{
+    left:14px;
+    right:14px;
+  }
+  .sticky-cta a{
+    flex:1;
+    text-align:center;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<nav>
-  <img src="logo.jpg">
-  <div>
-    <a href="#">Home</a>
-    <a href="#shop">Shop</a>
-    <a href="#about">About</a>
-    <a href="#visit">Visit</a>
+<div class="grain"></div>
+
+<nav class="nav">
+  <a class="brand" href="#home">
+    <img src="logo.jpg" alt="Block Street Records logo">
+    <span>BLOCK ST. RECORDS</span>
+  </a>
+
+  <div class="navlinks">
+    <a href="#records">Records</a>
+    <a href="#story">Story</a>
+    <a href="#merch">Merch</a>
+    <a href="#locations">Locations</a>
+    <a href="#gallery">Gallery</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>BLOCK STREET<br>RECORDS</h1>
-  <p>New & vintage vinyl. Indie. Punk. Funk. Rare finds and everyday favorites — all in one place.</p>
-  <button>Visit the Shop</button>
-</section>
+<header class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="spinning-record"></div>
 
-<!-- RECORD SECTIONS -->
-<section id="shop">
-  <div class="grid">
+  <div class="hero-content reveal">
+    <div class="kicker"><span class="pulse-dot"></span> Fayetteville + Bentonville Indie Record Shops</div>
+    <h1>Drop the needle.<br>Find the magic.</h1>
+    <p>
+      Locally owned indie record shops packed with new and vintage vinyl, CDs, tapes,
+      shirts, posters, gifts, rare finds, deep cuts, and the kind of music you did not know
+      you needed until you found it.
+    </p>
 
-    <div class="card">
-      <img src="records-1.jpeg">
-      <span>New Arrivals</span>
+    <div class="hero-actions">
+      <a class="btn primary" href="#locations">Visit the Shop</a>
+      <a class="btn secondary" href="#merch">Shop Merch + Gift Cards</a>
     </div>
+  </div>
+</header>
 
-    <div class="card">
-      <img src="records-2.jpeg">
-      <span>Vintage & Rare</span>
-    </div>
+<div class="marquee">
+  <div class="marquee-track">
+    <span>VINYL</span><span>CDS</span><span>TAPES</span><span>POSTERS</span><span>MERCH</span><span>RARE FINDS</span><span>INDIE</span><span>PUNK</span><span>FUNK</span>
+    <span>VINYL</span><span>CDS</span><span>TAPES</span><span>POSTERS</span><span>MERCH</span><span>RARE FINDS</span><span>INDIE</span><span>PUNK</span><span>FUNK</span>
+  </div>
+</div>
 
-    <div class="card">
-      <img src="records-3.jpeg">
-      <span>Staff Picks</span>
-    </div>
+<section class="section" id="records">
+  <div class="section-title reveal">
+    <div class="eyebrow">Crate Digging Starts Here</div>
+    <h2>New releases, old ghosts, strange treasures.</h2>
+    <p>
+      Every bin has a story. Fresh arrivals, vintage pressings, punk, indie, psych,
+      classic rock, country, soundtracks, oddities, and the records that somehow find you.
+    </p>
+  </div>
 
+  <div class="feature-grid">
+    <article class="feature-card large reveal">
+      <img src="records-1.jpeg" alt="New release records">
+      <div class="feature-content">
+        <h3>Fresh Arrivals</h3>
+        <p>New vinyl, limited releases, soundtrack gems, and weekly finds.</p>
+      </div>
+    </article>
+
+    <article class="feature-card reveal">
+      <img src="records-2.jpeg" alt="Indie and punk vinyl bins">
+      <div class="feature-content">
+        <h3>Indie / Alt / Punk</h3>
+        <p>From cult favorites to noisy essentials.</p>
+      </div>
+    </article>
+
+    <article class="feature-card reveal">
+      <img src="records-3.jpeg" alt="Classic records">
+      <div class="feature-content">
+        <h3>Classic Cuts</h3>
+        <p>Rock, pop, essentials, deep catalog, and wall-worthy finds.</p>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- PARALLAX -->
-<div class="parallax"></div>
+<section class="section" id="story">
+  <div class="split">
+    <div class="image-stack reveal">
+      <img class="one" src="owner-wade.jpg" alt="Wade at Block Street Records">
+      <img class="two" src="wade-hold-record.jpg" alt="Wade holding Block Street Records logo">
+    </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about">
-
-    <img src="owner-wade.jpg">
-
-    <div>
-      <h2 style="font-family:Oswald; font-size:40px;">Since 2014</h2>
-      <p style="margin-top:20px; color:#ccc;">
-        Block Street Records has been a staple of the Fayetteville music scene since opening its doors in 2014. Built on a love for music and community, it's a place to discover something new every time you walk in.
+    <div class="story-card reveal">
+      <div class="eyebrow">Opened November 24, 2014</div>
+      <h2>Built by people who still believe in record stores.</h2>
+      <p>
+        Block Street Records is the kind of place where music still feels physical,
+        personal, and alive. The shelves are full, the walls are loud, and the shop has
+        the unmistakable feel of a real local music landmark.
+      </p>
+      <p>
+        Come in for one record. Leave with three albums, a poster, a story, and a new
+        favorite section to dig through next time.
       </p>
     </div>
-
   </div>
 </section>
 
-<!-- INSIDE SHOP -->
-<section>
-  <div class="grid">
-
-    <div class="card">
-      <img src="inside-store-1.jpg">
-      <span>Crate Digging</span>
+<section class="vinyl-wall">
+  <div class="vinyl-panel reveal">
+    <div class="eyebrow">Inside The Shop</div>
+    <h2>Not an algorithm. An experience.</h2>
+    <p>
+      Records sound better when you find them by hand. Flip through the bins, check the
+      walls, ask what is playing, and follow whatever catches your eye.
+    </p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#locations">Find a Location</a>
     </div>
-
-    <div class="card">
-      <img src="IMG_6379.HEIC">
-      <span>In Store</span>
-    </div>
-
-    <div class="card">
-      <img src="beatles-dolls.jpg">
-      <span>Details</span>
-    </div>
-
   </div>
 </section>
 
-<!-- LOCATION -->
-<section id="visit">
-  <h2 style="font-family:Oswald; font-size:40px;">Visit</h2>
+<section class="section shop-band" id="merch">
+  <div class="section-title reveal">
+    <div class="eyebrow">Online Friendly</div>
+    <h2>Merch, shirts, gifts, and cards.</h2>
+    <p>
+      The full record inventory lives in the shop, where it belongs. Merch, shirts,
+      gift cards, and select items can be connected through Square for easy online purchase.
+    </p>
+  </div>
 
-  <p style="margin-top:20px; color:#ccc;">
-    Fayetteville: (479) 966-0623<br>
-    Bentonville: (479) 966-6232
-  </p>
+  <div class="merch-grid">
+    <div class="merch-card reveal">
+      <h3>Gift Cards</h3>
+      <p>The easiest way to give someone a perfect afternoon of crate digging.</p>
+      <a class="btn primary" href="#">Buy Gift Card</a>
+    </div>
 
-  <img src="store-front.jpg" style="width:100%; margin-top:30px; border-radius:8px;">
+    <div class="merch-card reveal">
+      <h3>Shirts</h3>
+      <p>Block Street gear with the kind of local record shop energy people actually wear.</p>
+      <a class="btn primary" href="#">Shop Shirts</a>
+    </div>
+
+    <div class="merch-card reveal">
+      <h3>Posters + Extras</h3>
+      <p>Small gifts, shop goods, music culture pieces, and things worth grabbing twice.</p>
+      <a class="btn primary" href="#">Shop Merch</a>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<div class="cta">Get Directions</div>
+<section class="section" id="locations">
+  <div class="section-title reveal">
+    <div class="eyebrow">Two Shops. Same Soul.</div>
+    <h2>Fayetteville + Bentonville.</h2>
+  </div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© Block Street Records</p>
+  <div class="locations">
+    <div class="location-card reveal">
+      <img src="store-front.jpg" alt="Block Street Records storefront">
+      <div class="location-info">
+        <h3>Fayetteville</h3>
+        <p>Locally owned indie record shop in Fayetteville, Arkansas.</p>
+        <p><strong>Phone:</strong> (479) 966-0623</p>
+        <a class="btn primary" href="https://www.google.com/maps/search/Block+Street+Records+Fayetteville+AR" target="_blank">Get Directions</a>
+      </div>
+    </div>
+
+    <div class="location-card reveal">
+      <img src="inside-store-1.jpg" alt="Inside Block Street Records">
+      <div class="location-info">
+        <h3>Bentonville</h3>
+        <p>The Block Street Records experience in Bentonville, Arkansas.</p>
+        <p><strong>Phone:</strong> (479) 966-6232</p>
+        <a class="btn primary" href="https://www.google.com/maps/search/Block+Street+Records+Bentonville+AR" target="_blank">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="section-title reveal">
+    <div class="eyebrow">The Details</div>
+    <h2>Walls full of records. Corners full of character.</h2>
+  </div>
+
+  <div class="gallery reveal">
+    <img src="turntable.jpg" alt="Turntable">
+    <img src="beatles-dolls.jpg" alt="Beatles dolls">
+    <img src="wade-headshot.jpg" alt="Wade portrait">
+    <img src="beatles-on-reciever.jpeg" alt="Vintage receiver">
+    <img src="wall-cd.jpg" alt="CD wall">
+    <img src="records.jpg" alt="Record wall">
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="logo.jpg" alt="Block Street Records logo">
+      <div>
+        <h4>Block Street Records</h4>
+        <p>Locally owned indie record shops.</p>
+      </div>
+    </div>
+
+    <div>
+      <p><strong>Fayetteville:</strong> (479) 966-0623</p>
+      <p><strong>Bentonville:</strong> (479) 966-6232</p>
+      <p>
+        <a href="https://www.instagram.com/blockstreetrecords/" target="_blank">Instagram</a> /
+        <a href="https://www.facebook.com/blockstreetrecords" target="_blank">Facebook</a>
+      </p>
+    </div>
+  </div>
 </footer>
 
-<script>
+<div class="sticky-cta">
+  <a href="#locations">Visit</a>
+  <a href="#merch">Merch</a>
+</div>
 
-// smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior:'smooth'
-    });
+<script>
+const revealItems = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+},{threshold:.15});
+
+revealItems.forEach(item=>revealObserver.observe(item));
+
+document.querySelectorAll(".feature-card, .merch-card, .location-card").forEach(card=>{
+  card.addEventListener("mousemove", e=>{
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rx = ((y / rect.height) - .5) * -8;
+    const ry = ((x / rect.width) - .5) * 8;
+    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+  });
+
+  card.addEventListener("mouseleave", ()=>{
+    card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)";
   });
 });
-
 </script>
 
 </body>
