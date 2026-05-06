@@ -50,7 +50,7 @@ a{color:inherit}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.3),transparent);
+  background:linear-gradient(to bottom,rgba(0,0,0,.88),rgba(0,0,0,.36),transparent);
   backdrop-filter:blur(14px);
 }
 
@@ -655,19 +655,40 @@ h2{
   line-height:1.75;
   margin-top:18px;
 }
+
 /* LIVE ROOTS */
 .live-roots{
-  background:
-    radial-gradient(circle at 75% 15%, rgba(255,216,76,.14), transparent 34%),
-    radial-gradient(circle at 15% 70%, rgba(255,40,54,.18), transparent 38%),
-    #070707;
+  position:relative;
   overflow:hidden;
-  padding-top:130px;
+  padding:130px 5vw;
+  background:
+    radial-gradient(circle at 70% 18%, rgba(255,216,76,.14), transparent 34%),
+    radial-gradient(circle at 12% 72%, rgba(255,40,54,.20), transparent 40%),
+    linear-gradient(180deg,#050505 0%,#0a0707 50%,#050505 100%);
+}
+
+.live-roots:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.35;
+  background:
+    linear-gradient(105deg, transparent 0 38%, rgba(255,216,76,.09) 45%, transparent 56%),
+    linear-gradient(75deg, transparent 0 50%, rgba(255,40,54,.08) 58%, transparent 70%);
+  animation:sectionLightMove 9s ease-in-out infinite alternate;
+}
+
+@keyframes sectionLightMove{
+  from{transform:translateX(-5%)}
+  to{transform:translateX(5%)}
 }
 
 .live-stage-head{
+  position:relative;
+  z-index:2;
   max-width:1180px;
-  margin:0 auto 52px;
+  margin:0 auto 56px;
   text-align:center;
 }
 
@@ -677,33 +698,34 @@ h2{
 }
 
 .live-stage-head p{
-  max-width:980px;
+  max-width:850px;
   margin:26px auto 0;
   color:#d0d0d0;
   line-height:1.75;
   font-size:20px;
-  margin-bottom:28px;
 }
 
-.live-feature-grid{
-  max-width:1700px;
+.live-showcase{
+  position:relative;
+  z-index:2;
+  max-width:1680px;
   margin:0 auto;
   display:grid;
-grid-template-columns:1.7fr .7fr;
-  gap:26px;
+  grid-template-columns:1.25fr .75fr;
+  gap:28px;
   align-items:stretch;
 }
 
 .live-photo{
   position:relative;
   margin:0;
-  border-radius:38px;
+  border-radius:40px;
   overflow:hidden;
   background:#050505;
   border:1px solid rgba(255,255,255,.16);
   box-shadow:
-    0 38px 120px rgba(0,0,0,.65),
-    0 0 80px rgba(255,40,54,.13);
+    0 45px 130px rgba(0,0,0,.7),
+    0 0 95px rgba(255,40,54,.13);
 }
 
 .live-photo img{
@@ -711,44 +733,43 @@ grid-template-columns:1.7fr .7fr;
   height:100%;
   display:block;
   object-fit:cover;
-  transform:scale(1.015);
-  animation:liveDrift 14s ease-in-out infinite alternate;
+  transform:scale(1.018);
+  animation:liveDrift 16s ease-in-out infinite alternate;
 }
 
-.live-photo-large{
-  min-height:620px;
+.live-photo-wide{
+  min-height:720px;
 }
 
-.live-photo-tall{
-  min-height:620px;
+.live-photo-archive{
+  min-height:720px;
 }
 
-.live-photo-large img{
-  object-position:center top;
+.live-photo-wide img{
+  object-position:center center;
 }
 
-.live-photo-tall img{
-  object-position:center 38%;
+.live-photo-archive img{
+  object-position:center 20%;
 }
 
 .live-photo:before{
   content:"";
   position:absolute;
-  inset:-30%;
+  inset:-35%;
   z-index:2;
   pointer-events:none;
   background:
     linear-gradient(
       115deg,
       transparent 0%,
-      transparent 35%,
-      rgba(255,216,76,.18) 45%,
-      rgba(255,40,54,.14) 52%,
-      transparent 65%,
+      transparent 34%,
+      rgba(255,216,76,.28) 45%,
+      rgba(255,40,54,.18) 52%,
+      transparent 66%,
       transparent 100%
     );
   mix-blend-mode:screen;
-  transform:translateX(-35%) rotate(8deg);
   animation:stageLightSweep 7s ease-in-out infinite alternate;
 }
 
@@ -756,31 +777,73 @@ grid-template-columns:1.7fr .7fr;
   content:"";
   position:absolute;
   inset:0;
-  z-index:4;
+  z-index:3;
   background:
-    radial-gradient(circle at 25% 15%, rgba(255,216,76,.18), transparent 28%),
-    radial-gradient(circle at 75% 20%, rgba(255,40,54,.13), transparent 30%),
-    linear-gradient(to top, rgba(0,0,0,.58), transparent 48%);
+    radial-gradient(circle at 25% 12%, rgba(255,216,76,.20), transparent 30%),
+    radial-gradient(circle at 75% 18%, rgba(255,40,54,.16), transparent 32%),
+    linear-gradient(to top, rgba(0,0,0,.72), transparent 48%);
   pointer-events:none;
   mix-blend-mode:screen;
   animation:stageGlowPulse 4.5s ease-in-out infinite alternate;
 }
 
+.live-photo figcaption{
+  position:absolute;
+  left:26px;
+  bottom:24px;
+  z-index:5;
+  color:white;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:12px;
+  font-weight:900;
+  text-shadow:0 4px 18px rgba(0,0,0,.85);
+}
+
+.live-stage-copy{
+  position:relative;
+  z-index:2;
+  max-width:1160px;
+  margin:52px auto 0;
+  padding:42px;
+  border-radius:34px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(12px);
+  column-count:2;
+  column-gap:46px;
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+.live-stage-copy p{
+  break-inside:avoid;
+  color:#d0d0d0;
+  line-height:1.72;
+  font-size:18px;
+  margin:0 0 24px;
+}
+
+@keyframes liveDrift{
+  from{transform:scale(1.018) translateX(0)}
+  to{transform:scale(1.07) translateX(-10px)}
+}
+
 @keyframes stageLightSweep{
   from{
-    opacity:.22;
+    opacity:.18;
     transform:translateX(-42%) rotate(8deg);
   }
   to{
-    opacity:.7;
+    opacity:.86;
     transform:translateX(42%) rotate(8deg);
   }
 }
 
 @keyframes stageGlowPulse{
-  from{opacity:.28}
-  to{opacity:.66}
+  from{opacity:.24}
+  to{opacity:.72}
 }
+
 /* IMMERSIVE */
 .immersive{
   min-height:92vh;
@@ -1084,19 +1147,13 @@ grid-template-columns:1.7fr .7fr;
 @media(max-width:1000px){
   .hero{grid-template-columns:1fr;padding-top:120px}
   .turntable-wrap{order:-1;margin-top:30px}
-  .live-feature-grid{
-  grid-template-columns:1fr;
-}
-
-.live-photo-large,
-.live-photo-tall{
-  min-height:420px;
-}
   .navlinks{display:none}
-  .live-content{grid-template-columns:1fr}
   .crate-card,.crate-card.wide{grid-column:span 12}
   .story,.merch-grid,.location-grid,.request-wrap{grid-template-columns:1fr}
   .merch-grid{grid-template-columns:1fr 1fr}
+  .live-showcase{grid-template-columns:1fr}
+  .live-photo-wide,.live-photo-archive{min-height:460px}
+  .live-stage-copy{column-count:1}
   .gallery{grid-template-columns:1fr 1fr}
   .gallery img,.gallery img:nth-child(1),.gallery img:nth-child(3),.gallery img:nth-child(6){
     grid-column:auto;
@@ -1119,6 +1176,8 @@ grid-template-columns:1.7fr .7fr;
   .merch-grid{grid-template-columns:1fr}
   .record-form{grid-template-columns:1fr}
   .player-drawer.active{bottom:88px}
+  .live-photo-wide,.live-photo-archive{min-height:360px}
+  .live-stage-copy{padding:28px}
 }
 </style>
 </head>
@@ -1290,18 +1349,18 @@ grid-template-columns:1.7fr .7fr;
     <div class="eyebrow">From The Stage</div>
     <h2>Before the bins, there was the stage.</h2>
     <p>
-      Wade Ogle came from the live-music world — playing in bands like The Faith Healers
-      and carrying that same Fayetteville music energy into Block Street Records.
+      Wade Ogle came from the live-music world — playing in bands like The Faith Healers,
+      standing inside the same Fayetteville music culture that would eventually shape the soul of Block Street Records.
     </p>
   </div>
 
-  <div class="live-feature-grid reveal">
-    <figure class="live-photo live-photo-large">
+  <div class="live-showcase reveal">
+    <figure class="live-photo live-photo-wide">
       <img src="faith-healers-stage.jpg" alt="The Faith Healers live performance">
       <figcaption>The Faith Healers — Fayetteville, AR</figcaption>
     </figure>
 
-    <figure class="live-photo live-photo-tall">
+    <figure class="live-photo live-photo-archive">
       <img src="wade-stage.jpg" alt="Young Wade Ogle performing live">
       <figcaption>Wade Ogle — early live performance</figcaption>
     </figure>
@@ -1309,29 +1368,29 @@ grid-template-columns:1.7fr .7fr;
 
   <div class="live-stage-copy reveal">
     <p>
-  Before Block Street Records became one of the most loved record shops in Arkansas,
-  Wade Ogle was already part of Fayetteville’s underground music scene — playing loud rooms,
-  hauling gear through back doors, chasing songs deep into the night, and building community
-  around live music long before streaming flattened discovery into algorithms.
-</p>
+      Before Block Street Records became one of the most loved record shops in Arkansas,
+      Wade Ogle was already part of Fayetteville’s underground music scene — playing loud rooms,
+      hauling gear through back doors, chasing songs deep into the night, and building community
+      around live music long before streaming flattened discovery into algorithms.
+    </p>
 
-<p>
-  The spirit of those years still lives inside these walls. The shop carries the same energy
-  that once filled places like JR’s Lightbulb Club: obsessive music conversations, unexpected finds,
-  stacks that reward curiosity, and the feeling that music culture should still feel personal,
-  weird, human, and alive.
-</p>
+    <p>
+      The spirit of those years still lives inside these walls. The shop carries the same energy
+      that once filled places like JR’s Lightbulb Club: obsessive music conversations, unexpected finds,
+      stacks that reward curiosity, and the feeling that music culture should still feel personal,
+      weird, human, and alive.
+    </p>
 
-<p>
-  Block Street Records was never built to feel corporate or polished. It feels lived in.
-  Every aisle, handwritten divider, poster, turntable, and record bin reflects decades of music
-  history, collecting, touring, listening, and genuine love for the culture surrounding vinyl.
-</p>
+    <p>
+      Block Street Records was never built to feel corporate or polished. It feels lived in.
+      Every aisle, handwritten divider, poster, turntable, and record bin reflects decades of music
+      history, collecting, touring, listening, and genuine love for the culture surrounding vinyl.
+    </p>
 
-<p>
-  What started on stage eventually found a new form in the stacks — a place where old records,
-  new discoveries, local music history, and the people who care about it all still gather together.
-</p>
+    <p>
+      What started on stage eventually found a new form in the stacks — a place where old records,
+      new discoveries, local music history, and the people who care about it all still gather together.
+    </p>
   </div>
 </section>
 
