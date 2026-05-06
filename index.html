@@ -135,7 +135,13 @@ a{color:inherit}
   position:relative;
   z-index:3;
 }
+.turntable:hover .tonearm{
+  transform:rotate(18deg);
+}
 
+.turntable:hover .record{
+  animation-play-state:paused;
+}
 .kicker{
   display:inline-flex;
   align-items:center;
@@ -282,6 +288,25 @@ animation:
       rgba(255,255,255,.1) 320deg,
       transparent);
   opacity:.8;
+  .record:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.25) 48%,
+    transparent 55%
+  );
+  mix-blend-mode:overlay;
+  animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+  0%{transform:translateX(-100%) rotate(25deg);}
+  100%{transform:translateX(100%) rotate(25deg);}
+}
 }
 
 .record-logo{
@@ -299,10 +324,33 @@ animation:
 animation:
   spin 5.8s linear infinite,
   wobble 2.5s ease-in-out infinite alternate;}
+.dust{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
+}
 
+.dust span{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:.15;
+  border-radius:50%;
+  animation:floatDust linear infinite;
+}
+
+@keyframes floatDust{
+  from{transform:translateY(0)}
+  to{transform:translateY(-120vh)}
+}
 
 @keyframes spin{to{transform:rotate(360deg)}}
-
+@keyframes wobble{
+  0%   { transform:rotate(0deg) scale(1); }
+  100% { transform:rotate(360deg) scale(1.015); }
+}
 .tonearm{
   position:absolute;
   right:10%;
@@ -899,6 +947,13 @@ h2{
   <div class="turntable-wrap reveal">
     <div class="turntable">
       <div class="record">
+        <div class="dust">
+  <span style="left:10%; animation-duration:6s;"></span>
+  <span style="left:30%; animation-duration:8s;"></span>
+  <span style="left:55%; animation-duration:7s;"></span>
+  <span style="left:75%; animation-duration:9s;"></span>
+  <span style="left:90%; animation-duration:6s;"></span>
+</div>
   <img class="record-logo" src="logo.jpg" alt="Block Street Records logo">
 </div>
 
