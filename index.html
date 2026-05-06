@@ -1153,6 +1153,142 @@ h2{
 
 <section class="immersive">
   <div class="immersive-card reveal">
+    <!-- ===== LIVE ROOTS / FAITH HEALERS SECTION ===== -->
+<section class="live-roots">
+  <div class="live-overlay"></div>
+
+  <div class="live-content">
+    <div class="live-text">
+      <h2>FROM THE STAGE</h2>
+      <p>
+        Before the shop, there was the stage.
+        Long nights, loud rooms, real music.
+      </p>
+
+      <p>
+        Wade Ogle wasn’t just around it — he lived it.
+        Playing in bands like The Faith Healers, helping shape a scene
+        where people didn’t just hear music… they felt it.
+      </p>
+
+      <p>
+        That same energy lives here now — in every record,
+        every conversation, every discovery.
+      </p>
+
+      <span class="live-caption">
+        The Faith Healers — Fayetteville, AR
+      </span>
+    </div>
+
+    <div class="live-image">
+      <!-- REPLACE WITH YOUR FILE -->
+      <img src="faith_healers_enhanced.jpg" alt="Faith Healers live performance">
+    </div>
+  </div>
+</section>
+    /* ===== LIVE ROOTS SECTION ===== */
+
+.live-roots {
+  position: relative;
+  padding: 120px 5%;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.live-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(255,60,60,0.15), transparent 60%),
+    linear-gradient(to bottom, rgba(0,0,0,0.8), #000);
+  pointer-events: none;
+}
+
+.live-content {
+  position: relative;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.live-text {
+  flex: 1;
+  color: #fff;
+}
+
+.live-text h2 {
+  font-size: 48px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.live-text p {
+  color: #aaa;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.live-caption {
+  display: block;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+.live-image {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.live-image img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+/* cinematic slow zoom */
+.live-image:hover img {
+  transform: scale(1.12);
+}
+
+/* FILM GRAIN */
+.live-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* LIGHT FLICKER */
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  50% { opacity: 1; }
+  100% { opacity: 0.97; }
+}
+
+.live-image {
+  animation: flicker 4s infinite;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .live-content {
+    flex-direction: column;
+  }
+
+  .live-text h2 {
+    font-size: 36px;
+  }
+}
     <div class="eyebrow">Analog Soul</div>
     <h2>Not a feed. Not an algorithm. A real place.</h2>
     <p>
