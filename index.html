@@ -730,51 +730,55 @@ grid-template-columns:1.7fr .7fr;
   object-position:center 18%;
 }
 
+.live-photo:before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  z-index:2;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      transparent 35%,
+      rgba(255,216,76,.18) 45%,
+      rgba(255,40,54,.14) 52%,
+      transparent 65%,
+      transparent 100%
+    );
+  mix-blend-mode:screen;
+  transform:translateX(-35%) rotate(8deg);
+  animation:stageLightSweep 7s ease-in-out infinite alternate;
+}
+
 .live-photo:after{
   content:"";
   position:absolute;
   inset:0;
+  z-index:4;
   background:
-    linear-gradient(120deg, transparent 35%, rgba(255,255,255,.12) 48%, transparent 60%),
-    linear-gradient(to top, rgba(0,0,0,.55), transparent 45%);
-  mix-blend-mode:screen;
+    radial-gradient(circle at 25% 15%, rgba(255,216,76,.18), transparent 28%),
+    radial-gradient(circle at 75% 20%, rgba(255,40,54,.13), transparent 30%),
+    linear-gradient(to top, rgba(0,0,0,.58), transparent 48%);
   pointer-events:none;
-  animation:stageSweep 5s ease-in-out infinite alternate;
+  mix-blend-mode:screen;
+  animation:stageGlowPulse 4.5s ease-in-out infinite alternate;
 }
 
-.live-photo figcaption{
-  position:absolute;
-  left:24px;
-  bottom:22px;
-  z-index:3;
-  color:white;
-  text-transform:uppercase;
-  letter-spacing:.15em;
-  font-size:12px;
-  font-weight:900;
-  text-shadow:0 4px 18px rgba(0,0,0,.7);
+@keyframes stageLightSweep{
+  from{
+    opacity:.22;
+    transform:translateX(-42%) rotate(8deg);
+  }
+  to{
+    opacity:.7;
+    transform:translateX(42%) rotate(8deg);
+  }
 }
 
-.live-stage-copy{
-  max-width:850px;
-  margin:42px auto 0;
-  text-align:center;
-}
-
-.live-stage-copy p{
-  color:#d0d0d0;
-  line-height:1.75;
-  font-size:20px;
-}
-
-@keyframes liveDrift{
-  from{transform:scale(1.015) translateX(0)}
-  to{transform:scale(1.07) translateX(-10px)}
-}
-
-@keyframes stageSweep{
-  from{opacity:.25}
-  to{opacity:.65}
+@keyframes stageGlowPulse{
+  from{opacity:.28}
+  to{opacity:.66}
 }
 /* IMMERSIVE */
 .immersive{
