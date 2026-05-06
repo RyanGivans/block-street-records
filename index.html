@@ -10,19 +10,16 @@
 <style>
 :root{
   --black:#050505;
-  --ink:#0b0b0b;
-  --cream:#f6ead2;
   --red:#ff2836;
   --yellow:#ffd84c;
-  --blue:#00b7ff;
-  --pink:#ff4fd8;
   --green:#36ff8f;
+  --spin-speed:5.8s;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  background:var(--black);
+  background:#050505;
   color:white;
   font-family:Inter,sans-serif;
   overflow-x:hidden;
@@ -34,8 +31,8 @@ body:before{
   inset:0;
   z-index:9998;
   pointer-events:none;
-  opacity:.11;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
+  opacity:.1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
 }
 
 a{color:inherit}
@@ -51,7 +48,7 @@ a{color:inherit}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:linear-gradient(to bottom,rgba(0,0,0,.82),rgba(0,0,0,.28),transparent);
+  background:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.3),transparent);
   backdrop-filter:blur(14px);
 }
 
@@ -70,12 +67,10 @@ a{color:inherit}
   width:50px;
   height:50px;
   border-radius:50%;
-  box-shadow:0 0 25px rgba(255,255,255,.22);
 }
 
 .navlinks{
   display:flex;
-  align-items:center;
   gap:24px;
 }
 
@@ -106,10 +101,10 @@ a{color:inherit}
   position:absolute;
   inset:0;
   background:
-    linear-gradient(90deg, rgba(0,0,0,.96), rgba(0,0,0,.78), rgba(0,0,0,.35)),
-    linear-gradient(0deg, #050505 0%, transparent 42%),
+    linear-gradient(90deg,rgba(0,0,0,.96),rgba(0,0,0,.76),rgba(0,0,0,.35)),
+    linear-gradient(0deg,#050505 0%,transparent 42%),
     url("inside-store-1.jpg") center/cover;
-  filter:saturate(1.18) contrast(1.08);
+  filter:saturate(1.2) contrast(1.08);
   transform:scale(1.08);
   animation:heroDrift 18s ease-in-out infinite alternate;
 }
@@ -119,33 +114,12 @@ a{color:inherit}
   to{transform:scale(1.14) translateX(-24px)}
 }
 
-.hero:after{
-  content:"";
-  position:absolute;
-  inset:-20%;
-  background:
-    radial-gradient(circle at 70% 50%, rgba(255,40,54,.25), transparent 30%),
-    radial-gradient(circle at 78% 28%, rgba(0,183,255,.22), transparent 24%),
-    radial-gradient(circle at 30% 80%, rgba(255,216,76,.15), transparent 28%);
-  filter:blur(18px);
-  pointer-events:none;
-}
-
 .hero-copy{
   position:relative;
   z-index:3;
 }
-.turntable:hover .tonearm{
-  transform:rotate(18deg);
-}
 
-.turntable:hover .record{
-  animation-play-state:paused;
-}
 .kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
   color:var(--yellow);
   text-transform:uppercase;
   letter-spacing:.22em;
@@ -154,24 +128,12 @@ a{color:inherit}
   margin-bottom:22px;
 }
 
-.kicker span{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--red);
-  box-shadow:0 0 20px var(--red);
-}
-
 .hero h1{
   font-family:"Bebas Neue",sans-serif;
   font-size:clamp(78px,11vw,170px);
   line-height:.82;
-  letter-spacing:.015em;
   text-transform:uppercase;
-  text-shadow:
-    7px 6px 0 rgba(255,40,54,.30),
-    -5px -4px 0 rgba(0,183,255,.16),
-    0 0 45px rgba(255,255,255,.13);
+  text-shadow:7px 6px 0 rgba(255,40,54,.3),-5px -4px 0 rgba(0,183,255,.16);
 }
 
 .hero p{
@@ -215,31 +177,27 @@ a{color:inherit}
   backdrop-filter:blur(12px);
 }
 
-.btn:hover{
-  transform:translateY(-4px) scale(1.02);
-}
+.btn:hover{transform:translateY(-4px) scale(1.02)}
 
-/* TURNTABLE HERO */
+/* TURNTABLE */
 .turntable-wrap{
   position:relative;
   z-index:3;
   width:min(680px,90vw);
   margin:auto;
   aspect-ratio:1.1/1;
+  transition:.15s linear;
 }
 
 .turntable{
   position:absolute;
   inset:8% 0 0 0;
   border-radius:44px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.03)),
-    #111;
+  background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.03)),#111;
   border:1px solid rgba(255,255,255,.18);
-  box-shadow:
-    0 40px 120px rgba(0,0,0,.75),
-    inset 0 0 80px rgba(255,255,255,.04);
+  box-shadow:0 40px 120px rgba(0,0,0,.75), inset 0 0 80px rgba(255,255,255,.04);
   overflow:hidden;
+  cursor:pointer;
 }
 
 .turntable:before{
@@ -258,14 +216,13 @@ a{color:inherit}
   top:13%;
   border-radius:50%;
   background:
-    radial-gradient(circle at center, #111 0 7%, var(--yellow) 7.5% 14%, #111 14.5% 18%, #050505 19% 100%);
+    radial-gradient(circle at center,#111 0 6%,#111 6.5% 100%);
   box-shadow:
     0 0 0 8px rgba(255,255,255,.025),
     0 35px 80px rgba(0,0,0,.75),
     inset 0 0 45px rgba(255,255,255,.08);
-animation:
-  spin 5.8s linear infinite,
-  wobble 2.5s ease-in-out infinite alternate;}
+  animation:recordSpin var(--spin-speed) linear infinite;
+}
 
 .record:before{
   content:"";
@@ -273,41 +230,30 @@ animation:
   inset:0;
   border-radius:50%;
   background:
-    repeating-radial-gradient(circle at center,
-      transparent 0 10px,
-      rgba(255,255,255,.055) 11px 12px),
-    conic-gradient(from 0deg,
-      rgba(255,255,255,.12),
-      transparent 20deg,
-      rgba(255,255,255,.05) 40deg,
-      transparent 70deg,
-      rgba(255,255,255,.1) 100deg,
-      transparent 140deg,
-      rgba(255,255,255,.08) 190deg,
-      transparent 250deg,
-      rgba(255,255,255,.1) 320deg,
-      transparent);
-  opacity:.8;
+    repeating-radial-gradient(circle at center, transparent 0 10px, rgba(255,255,255,.055) 11px 12px),
+    conic-gradient(from 0deg,rgba(255,255,255,.12),transparent 20deg,rgba(255,255,255,.05) 40deg,transparent 70deg,rgba(255,255,255,.1) 100deg,transparent 140deg,rgba(255,255,255,.08) 190deg,transparent 250deg,rgba(255,255,255,.1) 320deg,transparent);
+  opacity:.82;
 }
-  .record:after{
+
+.record:after{
   content:"";
   position:absolute;
   inset:0;
   border-radius:50%;
-  background:linear-gradient(
-    120deg,
-    transparent 40%,
-    rgba(255,255,255,0.25) 48%,
-    transparent 55%
-  );
+  background:linear-gradient(120deg,transparent 38%,rgba(255,255,255,.24) 48%,transparent 58%);
   mix-blend-mode:overlay;
   animation:shine 4s linear infinite;
 }
 
-@keyframes shine{
-  0%{transform:translateX(-100%) rotate(25deg);}
-  100%{transform:translateX(100%) rotate(25deg);}
+@keyframes recordSpin{
+  0%{transform:rotate(0deg) scale(1)}
+  50%{transform:rotate(180deg) scale(1.012)}
+  100%{transform:rotate(360deg) scale(1)}
 }
+
+@keyframes shine{
+  from{transform:translateX(-100%) rotate(25deg)}
+  to{transform:translateX(100%) rotate(25deg)}
 }
 
 .record-logo{
@@ -317,34 +263,35 @@ animation:
   height:40%;
   object-fit:cover;
   border-radius:50%;
-  z-index:3;
-  box-shadow:
-    0 0 0 6px #111,
-    0 0 0 9px rgba(255,255,255,.18),
-    0 0 28px rgba(255,255,255,.28);
-  animation:spin 5.8s linear infinite;
+  z-index:4;
+  box-shadow:0 0 0 7px #111,0 0 0 10px rgba(255,255,255,.16),0 0 28px rgba(255,255,255,.28);
+}
+
+/* DUST */
+.dust{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
 }
 
 .dust span{
   position:absolute;
+  bottom:-20px;
   width:2px;
   height:2px;
   background:white;
-  opacity:.15;
+  opacity:.16;
   border-radius:50%;
   animation:floatDust linear infinite;
 }
 
 @keyframes floatDust{
   from{transform:translateY(0)}
-  to{transform:translateY(-120vh)}
+  to{transform:translateY(-90vh)}
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes wobble{
-  0%   { transform:rotate(0deg) scale(1); }
-  100% { transform:rotate(360deg) scale(1.015); }
-}
+/* TONEARM */
 .tonearm{
   position:absolute;
   right:10%;
@@ -352,14 +299,11 @@ animation:
   width:26%;
   height:58%;
   transform-origin:80% 10%;
-  transform:rotate(22deg);
-  animation:armDrop 4s ease-in-out infinite alternate;
+  transform:rotate(18deg);
+  transition:.7s cubic-bezier(.2,.8,.2,1);
 }
 
-@keyframes armDrop{
-  from{transform:rotate(18deg)}
-  to{transform:rotate(26deg)}
-}
+.turntable.active .tonearm{transform:rotate(27deg)}
 
 .arm-base{
   position:absolute;
@@ -401,7 +345,7 @@ animation:
   left:7%;
   bottom:7%;
   right:8%;
-  height:82px;
+  min-height:82px;
   border-radius:22px;
   background:rgba(0,0,0,.62);
   border:1px solid rgba(255,255,255,.13);
@@ -411,6 +355,7 @@ animation:
   align-items:center;
   gap:18px;
   padding:16px;
+  z-index:8;
 }
 
 .eq{
@@ -429,15 +374,13 @@ animation:
   animation:eq 1s ease-in-out infinite;
 }
 
-.eq i:nth-child(1){height:12px;animation-delay:.1s}
+.eq i:nth-child(1){height:12px}
 .eq i:nth-child(2){height:26px;animation-delay:.2s}
 .eq i:nth-child(3){height:18px;animation-delay:.3s}
 .eq i:nth-child(4){height:34px;animation-delay:.4s}
 .eq i:nth-child(5){height:22px;animation-delay:.5s}
 
-@keyframes eq{
-  50%{height:8px}
-}
+@keyframes eq{50%{height:8px}}
 
 .now-title small{
   display:block;
@@ -452,6 +395,7 @@ animation:
   display:block;
   margin-top:4px;
   font-size:15px;
+  transition:.3s;
 }
 
 .dial{
@@ -459,7 +403,18 @@ animation:
   height:48px;
   border-radius:50%;
   background:radial-gradient(circle,#eee,#777 68%,#222);
-  box-shadow:inset 0 0 12px rgba(0,0,0,.55);
+}
+
+/* HERO TRANSITION */
+.hero-transition{
+  height:150px;
+  margin-top:-80px;
+  position:relative;
+  z-index:5;
+  background:
+    radial-gradient(circle at center, rgba(255,40,54,.22), transparent 58%),
+    linear-gradient(to bottom, transparent, #050505 72%);
+  filter:blur(4px);
 }
 
 /* MARQUEE */
@@ -506,7 +461,6 @@ h2{
   font-family:"Bebas Neue";
   font-size:clamp(54px,8vw,112px);
   line-height:.9;
-  letter-spacing:.02em;
 }
 
 .section-head{
@@ -539,11 +493,10 @@ h2{
   border:1px solid rgba(255,255,255,.13);
   box-shadow:0 30px 80px rgba(0,0,0,.42);
   transition:.45s ease;
+  transform-style:preserve-3d;
 }
 
-.crate-card.wide{
-  grid-column:span 8;
-}
+.crate-card.wide{grid-column:span 8}
 
 .crate-card img{
   position:absolute;
@@ -562,13 +515,11 @@ h2{
 }
 
 .crate-card:hover{
-  transform:translateY(-10px);
+  transform:rotateX(4deg) rotateY(-4deg) translateY(-10px);
   box-shadow:0 42px 100px rgba(0,0,0,.62);
 }
 
-.crate-card:hover img{
-  transform:scale(1.12);
-}
+.crate-card:hover img{transform:scale(1.12)}
 
 .crate-content{
   position:absolute;
@@ -632,11 +583,8 @@ h2{
 .story-panel{
   padding:46px;
   border-radius:34px;
-  background:
-    linear-gradient(145deg,rgba(255,40,54,.14),rgba(255,255,255,.04)),
-    rgba(255,255,255,.04);
+  background:linear-gradient(145deg,rgba(255,40,54,.14),rgba(255,255,255,.04)),rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 30px 100px rgba(0,0,0,.48);
 }
 
 .story-panel p{
@@ -689,7 +637,6 @@ h2{
 
 .merch-card{
   position:relative;
-  overflow:hidden;
   min-height:310px;
   padding:34px;
   border-radius:34px;
@@ -697,30 +644,15 @@ h2{
   border:1px solid rgba(255,255,255,.14);
 }
 
-.merch-card:before{
-  content:"";
-  position:absolute;
-  width:200px;
-  height:200px;
-  right:-58px;
-  top:-58px;
-  border-radius:50%;
-  background:var(--red);
-  opacity:.18;
-  filter:blur(8px);
-}
-
 .merch-card h3{
   font-family:"Bebas Neue";
   font-size:54px;
-  position:relative;
 }
 
 .merch-card p{
   color:#cfcfcf;
   line-height:1.6;
   margin:12px 0 26px;
-  position:relative;
 }
 
 /* LOCATIONS */
@@ -743,9 +675,7 @@ h2{
   object-fit:cover;
 }
 
-.location-info{
-  padding:32px;
-}
+.location-info{padding:32px}
 
 .location-info h3{
   font-family:"Bebas Neue";
@@ -841,6 +771,7 @@ h2{
   box-shadow:0 0 32px rgba(255,40,54,.5);
 }
 
+/* REVEAL */
 .reveal{
   opacity:0;
   transform:translateY(34px);
@@ -853,38 +784,13 @@ h2{
 }
 
 @media(max-width:1000px){
-  .hero{
-    grid-template-columns:1fr;
-    padding-top:120px;
-  }
-
-  .turntable-wrap{
-    order:-1;
-    margin-top:30px;
-    opacity:.96;
-  }
-
+  .hero{grid-template-columns:1fr;padding-top:120px}
+  .turntable-wrap{order:-1;margin-top:30px}
   .navlinks{display:none}
-
-  .crate-card,
-  .crate-card.wide{
-    grid-column:span 12;
-  }
-
-  .story,
-  .merch-grid,
-  .location-grid{
-    grid-template-columns:1fr;
-  }
-
-  .gallery{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .gallery img,
-  .gallery img:nth-child(1),
-  .gallery img:nth-child(3),
-  .gallery img:nth-child(6){
+  .crate-card,.crate-card.wide{grid-column:span 12}
+  .story,.merch-grid,.location-grid{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .gallery img,.gallery img:nth-child(1),.gallery img:nth-child(3),.gallery img:nth-child(6){
     grid-column:auto;
     grid-row:auto;
     height:250px;
@@ -895,7 +801,7 @@ h2{
   .hero,.section{padding-left:24px;padding-right:24px}
   .actions .btn{width:100%}
   .turntable-wrap{width:100%}
-  .now-playing{grid-template-columns:auto 1fr; height:auto}
+  .now-playing{grid-template-columns:auto 1fr}
   .dial{display:none}
   .poster-stack{min-height:570px}
   .poster.one{width:82%;height:360px}
@@ -925,7 +831,7 @@ h2{
 
 <header class="hero" id="home">
   <div class="hero-copy reveal">
-    <div class="kicker"><span></span> Fayetteville + Bentonville</div>
+    <div class="kicker">● Fayetteville + Bentonville</div>
     <h1>The record shop lives.</h1>
     <p>
       Locally owned indie record shops with new and vintage vinyl, CDs, tapes,
@@ -939,17 +845,18 @@ h2{
   </div>
 
   <div class="turntable-wrap reveal">
-    <div class="turntable">
+    <div class="turntable active">
+      <div class="dust">
+        <span style="left:10%; animation-duration:6s;"></span>
+        <span style="left:30%; animation-duration:8s;"></span>
+        <span style="left:55%; animation-duration:7s;"></span>
+        <span style="left:75%; animation-duration:9s;"></span>
+        <span style="left:90%; animation-duration:6s;"></span>
+      </div>
+
       <div class="record">
-        <div class="dust">
-  <span style="left:10%; animation-duration:6s;"></span>
-  <span style="left:30%; animation-duration:8s;"></span>
-  <span style="left:55%; animation-duration:7s;"></span>
-  <span style="left:75%; animation-duration:9s;"></span>
-  <span style="left:90%; animation-duration:6s;"></span>
-</div>
-  <img class="record-logo" src="logo.jpg" alt="Block Street Records logo">
-</div>
+        <img class="record-logo" src="logo.jpg" alt="Block Street Records logo">
+      </div>
 
       <div class="tonearm">
         <div class="arm-base"></div>
@@ -958,20 +865,18 @@ h2{
       </div>
 
       <div class="now-playing">
-        <div class="eq">
-          <i></i><i></i><i></i><i></i><i></i>
-        </div>
-
+        <div class="eq"><i></i><i></i><i></i><i></i><i></i></div>
         <div class="now-title">
           <small>Now Spinning</small>
           <strong>Block Street Records · Since 2014</strong>
         </div>
-
         <div class="dial"></div>
       </div>
     </div>
   </div>
 </header>
+
+<div class="hero-transition"></div>
 
 <div class="marquee">
   <div class="marquee-track">
@@ -1062,6 +967,40 @@ h2{
     <div class="actions">
       <a class="btn primary" href="#locations">Find a Location</a>
     </div>
+  </div>
+</section>
+
+<section class="section" id="staff">
+  <div class="section-head reveal">
+    <div class="eyebrow">Staff Picks</div>
+    <h2>What’s spinning behind the counter.</h2>
+    <p>Handpicked records, local favorites, deep cuts, and the albums worth taking home today.</p>
+  </div>
+
+  <div class="crate-grid">
+    <article class="crate-card reveal">
+      <img src="records.jpg" alt="Staff picks records">
+      <div class="crate-content">
+        <h3>Wade’s Picks</h3>
+        <p>Records with a story, a sound, and a reason to be in the bin.</p>
+      </div>
+    </article>
+
+    <article class="crate-card reveal">
+      <img src="beatles-on-reciever.jpeg" alt="Vintage receiver">
+      <div class="crate-content">
+        <h3>Vintage Vibes</h3>
+        <p>Classic sounds, oddball finds, and old-school shop energy.</p>
+      </div>
+    </article>
+
+    <article class="crate-card reveal">
+      <img src="beatles-dolls.jpg" alt="Music collectibles">
+      <div class="crate-content">
+        <h3>Shop Weird</h3>
+        <p>Posters, figures, gifts, collectibles, and things you did not expect.</p>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -1171,18 +1110,42 @@ h2{
 
 <script>
 const revealItems = document.querySelectorAll(".reveal");
-
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-    }
+    if(entry.isIntersecting) entry.target.classList.add("visible");
   });
 },{threshold:.15});
-
 revealItems.forEach(item=>observer.observe(item));
 
-const turntable = document.querySelector(".turntable-wrap");
+const turntableWrap = document.querySelector(".turntable-wrap");
+const turntable = document.querySelector(".turntable");
+const nowText = document.querySelector(".now-title strong");
+const tracks = [
+  "Block Street Records · Since 2014",
+  "Fresh Arrivals · In Store Now",
+  "Rare Finds · Dig the Crates",
+  "Indie · Punk · Funk · Soul",
+  "Fayetteville + Bentonville"
+];
+
+let trackIndex = 0;
+setInterval(()=>{
+  trackIndex = (trackIndex + 1) % tracks.length;
+  nowText.style.opacity = 0;
+  setTimeout(()=>{
+    nowText.textContent = tracks[trackIndex];
+    nowText.style.opacity = 1;
+  },300);
+},3000);
+
+turntable.addEventListener("click",()=>{
+  turntable.classList.toggle("active");
+});
+
+window.addEventListener("scroll",()=>{
+  const speed = Math.max(3.4, 5.8 - window.scrollY / 700);
+  document.documentElement.style.setProperty("--spin-speed", speed + "s");
+});
 
 document.addEventListener("mousemove", e=>{
   if(window.innerWidth < 900) return;
@@ -1190,7 +1153,11 @@ document.addEventListener("mousemove", e=>{
   const x = (e.clientX / window.innerWidth - .5) * 18;
   const y = (e.clientY / window.innerHeight - .5) * 18;
 
-  turntable.style.transform = `translate(${x}px, ${y}px) rotateX(${-y/3}deg) rotateY(${x/3}deg)`;
+  turntableWrap.style.transform = `translate(${x}px, ${y}px) rotateX(${-y/3}deg) rotateY(${x/3}deg)`;
+
+  const copyX = (e.clientX / window.innerWidth - .5) * 8;
+  const copyY = (e.clientY / window.innerHeight - .5) * 8;
+  document.querySelector(".hero-copy").style.transform = `translate(${copyX}px, ${copyY}px)`;
 });
 </script>
 
