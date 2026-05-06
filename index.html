@@ -283,22 +283,23 @@ a{color:inherit}
   opacity:.8;
 }
 
-.record:after{
-  content:"BLOCK ST.";
+.record-logo{
   position:absolute;
-  inset:32%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  inset:30%;
+  width:40%;
+  height:40%;
+  object-fit:cover;
   border-radius:50%;
-  background:
-    radial-gradient(circle,#111 0 18%,transparent 19%),
-    linear-gradient(145deg,var(--red),#8c1118);
-  color:white;
-  font-family:"Bebas Neue";
-  letter-spacing:.1em;
-  font-size:clamp(18px,2.8vw,34px);
-  text-shadow:0 2px 8px rgba(0,0,0,.5);
+  z-index:3;
+  box-shadow:
+    0 0 0 6px #111,
+    0 0 0 9px rgba(255,255,255,.18),
+    0 0 28px rgba(255,255,255,.28);
+  animation:counterSpin 5.8s linear infinite;
+}
+
+@keyframes counterSpin{
+  to{transform:rotate(-360deg)}
 }
 
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -898,7 +899,9 @@ h2{
 
   <div class="turntable-wrap reveal">
     <div class="turntable">
-      <div class="record"></div>
+      <div class="record">
+  <img class="record-logo" src="logo.jpg" alt="Block Street Records logo">
+</div>
 
       <div class="tonearm">
         <div class="arm-base"></div>
