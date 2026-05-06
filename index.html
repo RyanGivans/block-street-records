@@ -658,79 +658,118 @@ h2{
 /* LIVE ROOTS */
 .live-roots{
   background:
-    radial-gradient(circle at 75% 25%, rgba(255,216,76,.12), transparent 32%),
-    radial-gradient(circle at 20% 70%, rgba(255,40,54,.16), transparent 36%),
+    radial-gradient(circle at 75% 15%, rgba(255,216,76,.14), transparent 34%),
+    radial-gradient(circle at 15% 70%, rgba(255,40,54,.18), transparent 38%),
     #070707;
   overflow:hidden;
+  padding-top:130px;
 }
 
-.live-content{
-  display:grid;
-  grid-template-columns:.85fr 1.15fr;
-  gap:44px;
-  align-items:center;
+.live-stage-head{
+  max-width:1180px;
+  margin:0 auto 52px;
+  text-align:center;
 }
 
-.live-text p{
+.live-stage-head h2{
+  max-width:1050px;
+  margin:0 auto;
+}
+
+.live-stage-head p{
+  max-width:820px;
+  margin:26px auto 0;
   color:#d0d0d0;
   line-height:1.75;
-  font-size:18px;
-  margin-top:18px;
+  font-size:20px;
 }
 
-.live-caption{
-  display:block;
-  margin-top:24px;
-  color:#888;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  font-size:12px;
-  font-weight:900;
-}
-.live-image-grid{
+.live-feature-grid{
+  max-width:1700px;
+  margin:0 auto;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
+grid-template-columns:1.7fr .7fr;
+  gap:26px;
   align-items:stretch;
 }
-.live-image{
+
+.live-photo{
   position:relative;
-  border-radius:34px;
-  overflow:visible;
+  margin:0;
+  border-radius:38px;
+  overflow:hidden;
   background:#050505;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:14px;
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 35px 100px rgba(0,0,0,.58), 0 0 70px rgba(255,40,54,.12);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:
+    0 38px 120px rgba(0,0,0,.65),
+    0 0 80px rgba(255,40,54,.13);
 }
 
-.live-image img{
+.live-photo img{
   width:100%;
-  height:auto;
-  max-height:720px;
-  object-fit:contain;
+  height:100%;
   display:block;
-  transform:scale(1.01);
-  animation:liveDrift 12s ease-in-out infinite alternate;
+  object-fit:cover;
+  transform:scale(1.015);
+  animation:liveDrift 14s ease-in-out infinite alternate;
 }
 
-.live-image:after{
+.live-photo-large{
+  min-height:620px;
+}
+
+.live-photo-tall{
+  min-height:620px;
+}
+
+.live-photo-large img{
+  object-position:center top;
+}
+
+.live-photo-tall img{
+  object-position:center 18%;
+}
+
+.live-photo:after{
   content:"";
   position:absolute;
   inset:0;
   background:
     linear-gradient(120deg, transparent 35%, rgba(255,255,255,.12) 48%, transparent 60%),
-    radial-gradient(circle at 50% 20%, rgba(255,216,76,.18), transparent 30%);
+    linear-gradient(to top, rgba(0,0,0,.55), transparent 45%);
   mix-blend-mode:screen;
   pointer-events:none;
   animation:stageSweep 5s ease-in-out infinite alternate;
 }
 
+.live-photo figcaption{
+  position:absolute;
+  left:24px;
+  bottom:22px;
+  z-index:3;
+  color:white;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:12px;
+  font-weight:900;
+  text-shadow:0 4px 18px rgba(0,0,0,.7);
+}
+
+.live-stage-copy{
+  max-width:850px;
+  margin:42px auto 0;
+  text-align:center;
+}
+
+.live-stage-copy p{
+  color:#d0d0d0;
+  line-height:1.75;
+  font-size:20px;
+}
+
 @keyframes liveDrift{
-  from{transform:scale(1.04) translateX(0)}
-  to{transform:scale(1.1) translateX(-14px)}
+  from{transform:scale(1.015) translateX(0)}
+  to{transform:scale(1.07) translateX(-10px)}
 }
 
 @keyframes stageSweep{
@@ -1040,6 +1079,14 @@ padding:14px;
 @media(max-width:1000px){
   .hero{grid-template-columns:1fr;padding-top:120px}
   .turntable-wrap{order:-1;margin-top:30px}
+  .live-feature-grid{
+  grid-template-columns:1fr;
+}
+
+.live-photo-large,
+.live-photo-tall{
+  min-height:420px;
+}
   .navlinks{display:none}
   .live-content{grid-template-columns:1fr}
   .crate-card,.crate-card.wide{grid-column:span 12}
@@ -1234,33 +1281,33 @@ padding:14px;
 </section>
 
 <section class="section live-roots" id="live-roots">
-  <div class="live-content reveal">
-    <div class="live-text">
-      <div class="eyebrow">From The Stage</div>
-      <h2>Before the bins, there was the stage.</h2>
-      <p>
-        Wade Ogle came from the live-music world — playing in bands like The Faith Healers
-        and carrying that same Fayetteville music energy into Block Street Records.
-      </p>
-      <p>
-        What started on stage now lives in the stacks: loud walls, strange finds,
-        old stories, new discoveries, and a shop built by someone who has lived the music
-        from both sides of the counter.
-      </p>
-      <span class="live-caption">The Faith Healers — Fayetteville, AR</span>
-    </div>
-
-    <div class="live-image-grid">
-
-  <div class="live-image">
-    <img src="faith-healers-stage.jpg" alt="The Faith Healers live performance">
+  <div class="live-stage-head reveal">
+    <div class="eyebrow">From The Stage</div>
+    <h2>Before the bins, there was the stage.</h2>
+    <p>
+      Wade Ogle came from the live-music world — playing in bands like The Faith Healers
+      and carrying that same Fayetteville music energy into Block Street Records.
+    </p>
   </div>
 
-  <div class="live-image">
-    <img src="wade-stage.jpg" alt="Young Wade Ogle performing live">
+  <div class="live-feature-grid reveal">
+    <figure class="live-photo live-photo-large">
+      <img src="faith-healers-stage.jpg" alt="The Faith Healers live performance">
+      <figcaption>The Faith Healers — Fayetteville, AR</figcaption>
+    </figure>
+
+    <figure class="live-photo live-photo-tall">
+      <img src="wade-stage.jpg" alt="Young Wade Ogle performing live">
+      <figcaption>Wade Ogle — early live performance</figcaption>
+    </figure>
   </div>
 
-</div>
+  <div class="live-stage-copy reveal">
+    <p>
+      What started on stage now lives in the stacks: loud walls, strange finds,
+      old stories, new discoveries, and a shop built by someone who has lived the music
+      from both sides of the counter.
+    </p>
   </div>
 </section>
 
