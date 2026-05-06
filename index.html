@@ -13,11 +13,13 @@
   --red:#ff2836;
   --yellow:#ffd84c;
   --green:#36ff8f;
+  --blue:#00b7ff;
   --spin-speed:5.8s;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+
 body{
   background:#050505;
   color:white;
@@ -117,6 +119,7 @@ a{color:inherit}
 .hero-copy{
   position:relative;
   z-index:3;
+  transition:.15s linear;
 }
 
 .kicker{
@@ -133,7 +136,9 @@ a{color:inherit}
   font-size:clamp(78px,11vw,170px);
   line-height:.82;
   text-transform:uppercase;
-  text-shadow:7px 6px 0 rgba(255,40,54,.3),-5px -4px 0 rgba(0,183,255,.16);
+  text-shadow:
+    7px 6px 0 rgba(255,40,54,.3),
+    -5px -4px 0 rgba(0,183,255,.16);
 }
 
 .hero p{
@@ -165,6 +170,7 @@ a{color:inherit}
   font-size:12px;
   font-weight:900;
   transition:.25s ease;
+  cursor:pointer;
 }
 
 .btn.primary{
@@ -208,6 +214,13 @@ a{color:inherit}
   border:1px solid rgba(255,255,255,.08);
 }
 
+.turntable.active{
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.75),
+    inset 0 0 80px rgba(255,255,255,.04),
+    0 0 70px rgba(255,40,54,.2);
+}
+
 .record{
   position:absolute;
   width:68%;
@@ -215,8 +228,7 @@ a{color:inherit}
   left:7%;
   top:13%;
   border-radius:50%;
-  background:
-    radial-gradient(circle at center,#111 0 6%,#111 6.5% 100%);
+  background:radial-gradient(circle at center,#111 0 6%,#050505 6.5% 100%);
   box-shadow:
     0 0 0 8px rgba(255,255,255,.025),
     0 35px 80px rgba(0,0,0,.75),
@@ -403,6 +415,56 @@ a{color:inherit}
   height:48px;
   border-radius:50%;
   background:radial-gradient(circle,#eee,#777 68%,#222);
+}
+
+/* BANDCAMP DRAWER */
+.player-drawer{
+  position:fixed;
+  left:50%;
+  bottom:-150px;
+  transform:translateX(-50%);
+  width:min(760px,92vw);
+  z-index:2000;
+  transition:.45s cubic-bezier(.2,.8,.2,1);
+}
+
+.player-drawer.active{
+  bottom:22px;
+}
+
+.player-inner{
+  background:rgba(12,12,12,.94);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:24px;
+  box-shadow:0 28px 90px rgba(0,0,0,.65),0 0 55px rgba(255,40,54,.16);
+  backdrop-filter:blur(18px);
+  padding:14px;
+}
+
+.player-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-bottom:10px;
+}
+
+.player-header span{
+  color:var(--yellow);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:11px;
+  font-weight:900;
+}
+
+.player-header button{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);
+  color:white;
+  cursor:pointer;
 }
 
 /* HERO TRANSITION */
@@ -631,7 +693,7 @@ h2{
 
 .merch-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:22px;
 }
 
@@ -642,17 +704,99 @@ h2{
   border-radius:34px;
   background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));
   border:1px solid rgba(255,255,255,.14);
+  overflow:hidden;
+}
+
+.merch-card:before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-55px;
+  top:-55px;
+  border-radius:50%;
+  background:var(--red);
+  opacity:.16;
+  filter:blur(4px);
 }
 
 .merch-card h3{
   font-family:"Bebas Neue";
   font-size:54px;
+  position:relative;
 }
 
 .merch-card p{
   color:#cfcfcf;
   line-height:1.6;
   margin:12px 0 26px;
+  position:relative;
+}
+
+/* REQUEST FORM */
+.request{
+  background:
+    linear-gradient(120deg,rgba(255,40,54,.13),transparent 38%),
+    radial-gradient(circle at 85% 20%,rgba(255,216,76,.12),transparent 32%),
+    #070707;
+}
+
+.request-wrap{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:34px;
+  align-items:start;
+}
+
+.request-card{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.055);
+  border-radius:34px;
+  padding:34px;
+  backdrop-filter:blur(14px);
+}
+
+.request-card p{
+  color:#d1d1d1;
+  line-height:1.7;
+  font-size:18px;
+}
+
+.record-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.record-form input,
+.record-form select,
+.record-form textarea{
+  width:100%;
+  min-height:54px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(0,0,0,.45);
+  color:white;
+  padding:14px 16px;
+  outline:none;
+  font-family:Inter,sans-serif;
+}
+
+.record-form textarea{
+  grid-column:1/-1;
+  min-height:120px;
+  resize:vertical;
+}
+
+.record-form button{
+  grid-column:1/-1;
+}
+
+.form-note{
+  grid-column:1/-1;
+  color:#999;
+  font-size:12px;
+  line-height:1.5;
 }
 
 /* LOCATIONS */
@@ -688,6 +832,13 @@ h2{
   margin-top:8px;
 }
 
+.location-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:20px;
+}
+
 /* GALLERY */
 .gallery{
   display:grid;
@@ -712,6 +863,28 @@ h2{
 .gallery img:nth-child(1){grid-column:span 2}
 .gallery img:nth-child(3){grid-column:span 2;grid-row:span 2;height:534px}
 .gallery img:nth-child(6){grid-column:span 2}
+
+/* FINAL CTA */
+.final-cta{
+  padding:130px 5vw;
+  text-align:center;
+  background:
+    radial-gradient(circle at center,rgba(255,40,54,.18),transparent 35%),
+    #050505;
+}
+
+.final-cta h2{
+  max-width:1000px;
+  margin:auto;
+}
+
+.final-cta p{
+  max-width:680px;
+  margin:24px auto 0;
+  color:#ccc;
+  font-size:19px;
+  line-height:1.7;
+}
 
 /* FOOTER */
 .footer{
@@ -788,7 +961,8 @@ h2{
   .turntable-wrap{order:-1;margin-top:30px}
   .navlinks{display:none}
   .crate-card,.crate-card.wide{grid-column:span 12}
-  .story,.merch-grid,.location-grid{grid-template-columns:1fr}
+  .story,.merch-grid,.location-grid,.request-wrap{grid-template-columns:1fr}
+  .merch-grid{grid-template-columns:1fr 1fr}
   .gallery{grid-template-columns:1fr 1fr}
   .gallery img,.gallery img:nth-child(1),.gallery img:nth-child(3),.gallery img:nth-child(6){
     grid-column:auto;
@@ -808,6 +982,9 @@ h2{
   .poster.two{width:68%;height:310px}
   .sticky{left:14px;right:14px}
   .sticky a{flex:1;text-align:center}
+  .merch-grid{grid-template-columns:1fr}
+  .record-form{grid-template-columns:1fr}
+  .player-drawer.active{bottom:88px}
 }
 </style>
 </head>
@@ -823,9 +1000,10 @@ h2{
   <div class="navlinks">
     <a href="#records">Records</a>
     <a href="#story">Story</a>
+    <a href="#staff">Picks</a>
     <a href="#merch">Merch</a>
+    <a href="#request">Find A Record</a>
     <a href="#locations">Locations</a>
-    <a href="#gallery">Gallery</a>
   </div>
 </nav>
 
@@ -845,7 +1023,7 @@ h2{
   </div>
 
   <div class="turntable-wrap reveal">
-    <div class="turntable active">
+    <div class="turntable active" id="turntable">
       <div class="dust">
         <span style="left:10%; animation-duration:6s;"></span>
         <span style="left:30%; animation-duration:8s;"></span>
@@ -854,7 +1032,7 @@ h2{
         <span style="left:90%; animation-duration:6s;"></span>
       </div>
 
-      <div class="record">
+      <div class="record" id="record">
         <img class="record-logo" src="logo.jpg" alt="Block Street Records logo">
       </div>
 
@@ -875,6 +1053,22 @@ h2{
     </div>
   </div>
 </header>
+
+<div class="player-drawer" id="playerDrawer">
+  <div class="player-inner">
+    <div class="player-header">
+      <span>Lovers And Fighters · Wade Ogle</span>
+      <button id="closePlayer" aria-label="Close music player">×</button>
+    </div>
+
+    <iframe
+      style="border:0;width:100%;height:42px;"
+      src="https://bandcamp.com/EmbeddedPlayer/album=1364799051/size=small/bgcol=181a1b/linkcol=ff2836/transparent=true/"
+      seamless>
+      <a href="https://wadeogle.bandcamp.com/album/lovers-and-fighters">Lovers And Fighters by Wade Ogle</a>
+    </iframe>
+  </div>
+</div>
 
 <div class="hero-transition"></div>
 
@@ -943,14 +1137,15 @@ h2{
 
     <div class="story-panel reveal">
       <div class="eyebrow">Opened November 24, 2014</div>
-      <h2>Built for people who still want to feel music.</h2>
+      <h2>Founded by Wade Ogle.</h2>
       <p>
-        Block Street Records is a local music landmark with the warmth, grit,
-        color, and personality that cannot be faked. It is a shop built around discovery,
-        conversation, memory, and the simple joy of flipping through records by hand.
+        Block Street Records is Wade Ogle’s love letter to music, community, and the feeling of finding something real.
+        Since opening the Fayetteville shop on November 24, 2014, Wade has built more than a record store — he has built
+        a place where people come to dig, talk, discover, remember, and leave with something they did not know they needed.
       </p>
       <p>
-        Walk in for one album. Leave with a stack, a story, and a reason to come back.
+        From Fayetteville to Bentonville, Block Street Records still feels personal: full shelves, loud walls, strange finds,
+        staff picks, local character, and the kind of shop energy you cannot fake.
       </p>
     </div>
   </div>
@@ -972,9 +1167,9 @@ h2{
 
 <section class="section" id="staff">
   <div class="section-head reveal">
-    <div class="eyebrow">Staff Picks</div>
+    <div class="eyebrow">Fresh Drops + Staff Picks</div>
     <h2>What’s spinning behind the counter.</h2>
-    <p>Handpicked records, local favorites, deep cuts, and the albums worth taking home today.</p>
+    <p>Handpicked records, local favorites, deep cuts, oddball finds, and the albums worth taking home today.</p>
   </div>
 
   <div class="crate-grid">
@@ -1028,9 +1223,54 @@ h2{
     </div>
 
     <div class="merch-card reveal">
+      <h3>Posters</h3>
+      <p>Wall-worthy music culture, art, and shop finds that make a room feel louder.</p>
+      <a class="btn primary" href="#">Shop Posters</a>
+    </div>
+
+    <div class="merch-card reveal">
       <h3>Extras</h3>
-      <p>Posters, shop goods, small gifts, music culture pieces, and things worth grabbing while they last.</p>
+      <p>Small gifts, shop goods, collectibles, and things worth grabbing while they last.</p>
       <a class="btn primary" href="#">Shop Merch</a>
+    </div>
+  </div>
+</section>
+
+<section class="section request" id="request">
+  <div class="request-wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Looking For Something Specific?</div>
+      <h2>Ask about a record.</h2>
+      <p>
+        Searching for a certain pressing, artist, album, soundtrack, or hard-to-find favorite?
+        Send a request and the shop can check the bins. If it is available, Block Street Records
+        can help you buy it — and ship when possible.
+      </p>
+    </div>
+
+    <div class="request-card reveal">
+      <form class="record-form" id="recordRequestForm">
+        <input name="name" placeholder="Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="phone" placeholder="Phone">
+        <input name="album" placeholder="Artist / Album / Pressing">
+        <select name="format">
+          <option value="">Preferred Format</option>
+          <option>Vinyl</option>
+          <option>CD</option>
+          <option>Cassette</option>
+          <option>Any Format</option>
+        </select>
+        <select name="location">
+          <option value="">Preferred Location</option>
+          <option>Fayetteville</option>
+          <option>Bentonville</option>
+          <option>Either</option>
+        </select>
+        <textarea name="notes" placeholder="Notes: pressing, color variant, condition, budget, shipping request, etc."></textarea>
+        <button class="btn primary" type="submit">Ask About A Record</button>
+        <p class="form-note">This opens an email request. Replace the email address in the script before publishing.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -1048,8 +1288,10 @@ h2{
         <h3>Fayetteville</h3>
         <p>Locally owned indie record shop in Fayetteville, Arkansas.</p>
         <p><strong>Phone:</strong> (479) 966-0623</p>
-        <br>
-        <a class="btn primary" href="https://www.google.com/maps/search/Block+Street+Records+Fayetteville+AR" target="_blank">Get Directions</a>
+        <div class="location-actions">
+          <a class="btn primary" href="https://www.google.com/maps/search/Block+Street+Records+Fayetteville+AR" target="_blank">Get Directions</a>
+          <a class="btn dark" href="https://www.instagram.com/blockstreetrecords/" target="_blank">Instagram</a>
+        </div>
       </div>
     </div>
 
@@ -1059,8 +1301,10 @@ h2{
         <h3>Bentonville</h3>
         <p>The Block Street Records experience in Bentonville, Arkansas.</p>
         <p><strong>Phone:</strong> (479) 966-6232</p>
-        <br>
-        <a class="btn primary" href="https://www.google.com/maps/search/Block+Street+Records+Bentonville+AR" target="_blank">Get Directions</a>
+        <div class="location-actions">
+          <a class="btn primary" href="https://www.google.com/maps/search/Block+Street+Records+Bentonville+AR" target="_blank">Get Directions</a>
+          <a class="btn dark" href="https://www.instagram.com/blockstreetrecordsbentonville/" target="_blank">Instagram</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1082,6 +1326,21 @@ h2{
   </div>
 </section>
 
+<section class="final-cta">
+  <div class="reveal">
+    <div class="eyebrow">Drop In. Dig Around. Take Something Home.</div>
+    <h2>Find the record you didn’t know you came for.</h2>
+    <p>
+      Visit Fayetteville or Bentonville, flip through the bins, ask what’s playing,
+      and leave with something that sounds like it was waiting on you.
+    </p>
+    <div class="actions" style="justify-content:center;">
+      <a class="btn primary" href="#locations">Choose A Shop</a>
+      <a class="btn dark" href="#request">Ask About A Record</a>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -1096,7 +1355,8 @@ h2{
       <p><strong>Fayetteville:</strong> (479) 966-0623</p>
       <p><strong>Bentonville:</strong> (479) 966-6232</p>
       <p>
-        <a href="https://www.instagram.com/blockstreetrecords/" target="_blank">Instagram</a> /
+        <a href="https://www.instagram.com/blockstreetrecords/" target="_blank">Fayetteville Instagram</a> /
+        <a href="https://www.instagram.com/blockstreetrecordsbentonville/" target="_blank">Bentonville Instagram</a> /
         <a href="https://www.facebook.com/blockstreetrecords" target="_blank">Facebook</a>
       </p>
     </div>
@@ -1105,7 +1365,7 @@ h2{
 
 <div class="sticky">
   <a href="#locations">Visit</a>
-  <a href="#merch">Merch</a>
+  <a href="#request">Find Record</a>
 </div>
 
 <script>
@@ -1118,8 +1378,12 @@ const observer = new IntersectionObserver((entries)=>{
 revealItems.forEach(item=>observer.observe(item));
 
 const turntableWrap = document.querySelector(".turntable-wrap");
-const turntable = document.querySelector(".turntable");
+const turntable = document.querySelector("#turntable");
+const record = document.querySelector("#record");
 const nowText = document.querySelector(".now-title strong");
+const playerDrawer = document.querySelector("#playerDrawer");
+const closePlayer = document.querySelector("#closePlayer");
+
 const tracks = [
   "Block Street Records · Since 2014",
   "Fresh Arrivals · In Store Now",
@@ -1129,7 +1393,10 @@ const tracks = [
 ];
 
 let trackIndex = 0;
+let playerOpen = false;
+
 setInterval(()=>{
+  if(playerOpen) return;
   trackIndex = (trackIndex + 1) % tracks.length;
   nowText.style.opacity = 0;
   setTimeout(()=>{
@@ -1138,8 +1405,39 @@ setInterval(()=>{
   },300);
 },3000);
 
+function openPlayer(){
+  playerOpen = true;
+  turntable.classList.add("active");
+  playerDrawer.classList.add("active");
+  nowText.style.opacity = 0;
+  setTimeout(()=>{
+    nowText.textContent = "Lovers And Fighters · Wade Ogle";
+    nowText.style.opacity = 1;
+  },250);
+}
+
+function closeBandcampPlayer(){
+  playerOpen = false;
+  playerDrawer.classList.remove("active");
+  nowText.style.opacity = 0;
+  setTimeout(()=>{
+    nowText.textContent = "Block Street Records · Since 2014";
+    nowText.style.opacity = 1;
+  },250);
+}
+
+record.addEventListener("click",(event)=>{
+  event.stopPropagation();
+  openPlayer();
+});
+
 turntable.addEventListener("click",()=>{
-  turntable.classList.toggle("active");
+  openPlayer();
+});
+
+closePlayer.addEventListener("click",(event)=>{
+  event.stopPropagation();
+  closeBandcampPlayer();
 });
 
 window.addEventListener("scroll",()=>{
@@ -1158,6 +1456,35 @@ document.addEventListener("mousemove", e=>{
   const copyX = (e.clientX / window.innerWidth - .5) * 8;
   const copyY = (e.clientY / window.innerHeight - .5) * 8;
   document.querySelector(".hero-copy").style.transform = `translate(${copyX}px, ${copyY}px)`;
+});
+
+document.querySelector("#recordRequestForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const data = new FormData(this);
+  const name = data.get("name") || "";
+  const email = data.get("email") || "";
+  const phone = data.get("phone") || "";
+  const album = data.get("album") || "";
+  const format = data.get("format") || "";
+  const location = data.get("location") || "";
+  const notes = data.get("notes") || "";
+
+  const subject = encodeURIComponent("Record Request from Website");
+  const body = encodeURIComponent(
+`Name: ${name}
+Email: ${email}
+Phone: ${phone}
+
+Looking for: ${album}
+Preferred format: ${format}
+Preferred location: ${location}
+
+Notes:
+${notes}`
+  );
+
+  window.location.href = `mailto:REPLACE-WITH-SHOP-EMAIL@example.com?subject=${subject}&body=${body}`;
 });
 </script>
 
